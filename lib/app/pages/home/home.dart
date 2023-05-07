@@ -2,12 +2,10 @@ import 'package:book_store/app/mock/libraries.dart';
 import 'package:book_store/app/mock/wishlists.dart';
 import 'package:book_store/app/models/library.dart';
 import 'package:book_store/app/models/wishlist.dart';
-import 'package:book_store/app/pages/home/widgets/library_list.dart';
-import 'package:book_store/app/pages/home/widgets/rating_bar.dart';
+import 'package:book_store/app/pages/home/widgets/library_list.dart'; 
 import 'package:book_store/app/res/colors.dart';
 import 'package:book_store/app/res/dimensions.dart';
-import 'package:book_store/app/widgets/custom_app_bar.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:book_store/app/widgets/custom_app_bar.dart'; 
 import 'package:flutter/material.dart';
 
 import 'widgets/discover_more.dart';
