@@ -16,12 +16,15 @@ class RatingBar extends StatelessWidget {
       List<Widget> icons = [];
       for (int i = 1; i <= 5; i++) {
         icons.add(
-           Padding(
-            padding: const EdgeInsets.only(left: Dimensions.xxSmall),
+          Padding(
+            padding: (i != 1)
+                ? const EdgeInsets.only(left: Dimensions.xxSmall)
+                : const EdgeInsets.only(),
             child: Icon(
-              Icons.star, 
+              Icons.star,
               size: 10,
-              color: rate >= i ? AppColors.star : AppColors.grey.withOpacity(.7), 
+              color:
+                  rate >= i ? AppColors.star : AppColors.grey.withOpacity(.7),
             ),
           ),
         );
@@ -29,11 +32,8 @@ class RatingBar extends StatelessWidget {
       return icons;
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(left : Dimensions.xxSmall),
-      child: Row(
-        children: generateStars(),
-      ),
+    return Row(
+      children: generateStars(),
     );
   }
 }

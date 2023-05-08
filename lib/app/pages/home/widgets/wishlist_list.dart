@@ -1,8 +1,7 @@
 import 'package:book_store/app/models/wishlist.dart';
 import 'package:book_store/app/res/dimensions.dart';
+import 'package:book_store/app/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'rating_bar.dart';
 
 class WishlistList extends StatelessWidget {
   const WishlistList({
@@ -17,7 +16,7 @@ class WishlistList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom : Dimensions.medium),
+      padding: const EdgeInsets.only(bottom: Dimensions.medium),
       child: Row(
         children: [
           Image.asset(wishlist.imageUrl),
@@ -55,7 +54,7 @@ class WishlistList extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.only(left : Dimensions.small),
+                        padding: const EdgeInsets.only(left: Dimensions.small),
                         child: Text(
                           wishlist.author,
                           style: const TextStyle(
@@ -70,8 +69,10 @@ class WishlistList extends StatelessWidget {
                   ],
                 ),
               ),
-               SizedBox(height: size.height * 0.05),
-                RatingBar(rate: wishlist.review),
+              SizedBox(height: size.height * 0.05),
+              Padding(
+                  padding: const EdgeInsets.only(left: Dimensions.small),
+                  child: RatingBar(rate: wishlist.review)),
             ],
           ),
         ],

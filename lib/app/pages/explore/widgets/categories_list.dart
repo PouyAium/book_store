@@ -1,73 +1,51 @@
-import 'package:book_store/app/mock/categories.dart';
+import 'package:book_store/app/models/category.dart';
+import 'package:book_store/app/pages/pages.dart';
 import 'package:book_store/app/res/colors.dart';
 import 'package:book_store/app/res/dimensions.dart';
+import 'package:book_store/app/routes/names.dart';
+import 'package:book_store/app/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({
     super.key,
+    required this.category,
     required this.index,
-    required this.categoryIndex,
-    required this.onTap,
   });
 
+  final Category category;
   final int index;
-  final int categoryIndex;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      overlayColor: const MaterialStatePropertyAll(AppColors.white),
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: Dimensions.small,
-            ),
-            child: Text(
-              Categories.values[index].toUpperCase(),
-              style: const TextStyle(
-                color: AppColors.grey,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Hero(tag: '$index', child: Image.asset(category.imageUrl)),
+        const SizedBox(height: Dimensions.xxSmall),
+        Expanded(
+          child: Text(
+            category.name,
+            style: const TextStyle(
+              color: AppColors.secondary,
+              fontSize: Dimensions.normal,
+              fontWeight: FontWeight.w400,
             ),
           ),
-          if (categoryIndex == index)
-            Container(
-              margin: const EdgeInsets.only(
-                top: Dimensions.xxSmall,
-              ),
-              height: Dimensions.xSmall,
-              width: _textSize(
-                Categories.values[index].name,
-                const TextStyle(
-                  color: AppColors.grey,
-                ),
-              ).width,
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(
-                  Dimensions.normal,
-                ),
-              ),
-            ),
-        ],
-      ),
+        ),
+        Text(
+          category.author,
+          style: const TextStyle(
+            color: AppColors.grey,
+            fontSize: Dimensions.medium,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: Dimensions.medium),
+          child: RatingBar(rate: category.rate),
+        ),
+      ],
     );
-  }
-
-  //* Get size of categories titles
-  Size _textSize(String text, TextStyle textStyle) {
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text, style: textStyle),
-      maxLines: 1,
-      textDirection: TextDirection.ltr,
-    )..layout(
-        minWidth: 0,
-        maxWidth: double.infinity,
-      );
-    return textPainter.size;
   }
 }

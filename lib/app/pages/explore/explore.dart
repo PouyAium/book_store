@@ -1,11 +1,14 @@
+import 'package:book_store/app/enums/category.dart';
 import 'package:book_store/app/mock/categories.dart';
-import 'package:book_store/app/pages/explore/widgets/categories_list.dart';
+import 'package:book_store/app/models/category.dart';
 import 'package:book_store/app/pages/explore/widgets/poster.dart';
 import 'package:book_store/app/res/colors.dart';
 import 'package:book_store/app/res/dimensions.dart';
 import 'package:book_store/app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/categories_list.dart';
+import 'widgets/categories_slider.dart';
 import 'widgets/slider_indicator.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -46,8 +49,9 @@ class _ExplorePageState extends State<ExplorePage> {
             child: Poster(
               size: size,
               sliderIndex: sliderIndex,
-              onPageChanged: (index, reason) =>
-                  setState(() => sliderIndex = index),
+              onPageChanged: (index, reason) => setState(
+                () => sliderIndex = index,
+              ),
             ),
           ),
         ),
@@ -83,14 +87,14 @@ class _ExplorePageState extends State<ExplorePage> {
               horizontal: Dimensions.normal, vertical: Dimensions.xSmall),
           sliver: SliverToBoxAdapter(
             child: SizedBox(
-              height: size.height * 0.04,
+              height: size.height * 0.03,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: Categories.values.length,
+                itemCount: CategoryItems.values.length,
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return CategoriesList(
+                  return CategoriesSlider(
                     index: index,
                     categoryIndex: categoryIndex,
                     onTap: () => setState(
@@ -100,6 +104,27 @@ class _ExplorePageState extends State<ExplorePage> {
                 },
               ),
             ),
+          ),
+        ),
+
+        //* Categories Grid view list
+        SliverPadding(
+          padding: const EdgeInsets.only(
+            left: Dimensions.normal,
+            right: Dimensions.normal,
+            top: Dimensions.xSmall,
+          ),
+          sliver: SliverGrid.builder(
+            itemCount: categories.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 10,
+              childAspectRatio: .5,
+            ),
+            itemBuilder: (context, index) {
+              Category category = categories[index];
+              return CategoriesList(category: category, index: index);
+            },
           ),
         ),
       ],
