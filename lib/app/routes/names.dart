@@ -1,4 +1,4 @@
-const String navigation = '/'; 
-const String home = '/home'; 
-const String explore = '/explore'; 
-const String book = '/book'; 
+const String routeNavigation = '/';
+const String routeHome = '/home';
+const String routeExplore = '/explore';
+const String routeBook = '/book';
