@@ -6,9 +6,11 @@ class RatingBar extends StatelessWidget {
   const RatingBar({
     super.key,
     required this.rate,
+    this.size,
   });
 
   final int rate;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class RatingBar extends StatelessWidget {
                 : const EdgeInsets.only(),
             child: Icon(
               Icons.star,
-              size: 10,
+              size: size ?? 10,
               color:
                   rate >= i ? AppColors.star : AppColors.grey.withOpacity(.7),
             ),
